@@ -291,10 +291,3 @@ warehouse_db_tables_ready_task >> [load_full_offers_data,
 
 warehouse_db_tables_loaded_ready_task >> sales_funnel_transformation_task
 
-# Traffic analysis
-# location_traffic_task = PostgresOperator(
-#     task_id="calculate_location_traffic",
-#     dag=dag,
-#     postgres_conn_id="redshift",
-#     sql=sql_statements.STATION_TRAFFIC_SQL
-# )
