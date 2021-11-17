@@ -1,0 +1,65 @@
+version: '3.6'
+
+services:
+
+  airflow-metastore:
+    image: "postgres:9.6"
+    container_name: "airflow-metastore"
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+    ports:
+      - "54321:5432"
+    #        - ${TRANSACTIONAL_DB_PORT}:${TRANSACTIONAL_DB_PORT}
+#            - "54321:5432"
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
+
+  transactional_db:
+      image: "postgres:9.6"
+      container_name: "transactional_db"
+      environment:
+        - POSTGRES_USER=${TRANSACTIONAL_DB_USER}
+        - POSTGRES_PASSWORD=${TRANSACTIONAL_DB_PASSWORD}
+        - POSTGRES_DB=${TRANSACTIONAL_DB}
+      ports:
+        - "54322:54322"
+#        - ${TRANSACTIONAL_DB_PORT}:${TRANSACTIONAL_DB_PORT}
+#        - "5432:54320"
+      volumes:
+        - ./data/transactional_db:/var/lib/postgresql/data/
+#
+  data_warehouse_db:
+    image: "postgres:9.6"
+    container_name: "data_warehouse_db"
+    environment:
+      - POSTGRES_USER=${DATA_WAREHOUSE_DB_USER}
+      - POSTGRES_PASSWORD=${DATA_WAREHOUSE_DB_PASSWORD}
+      - POSTGRES_DB=${DATA_WAREHOUSE_DB}
+    ports:
+      - "54323:54323"
+#      - ${TRANSACTIONAL_DB_PORT}:${TRANSACTIONAL_DB_PORT}
+
+    volumes:
+      - ./data/data_warehouse:/var/lib/postgresql/data
+
+  airflow:
+      image: ${AIRFLOW_IMAGE_NAME:-apache/airflow:2.0.1-python3.8}
+      container_name: airflow
+      volumes:
+        - ./dags:/opt/airflow/dags
+        - ./sql:/opt/airflow/sql
+        - ./tests:/opt/airflow/tests
+        - ./data:/opt/airflow/data
+#        - ./logs:/opt/airflow/logs
+        - ./requirements.txt:/opt/airflow/requirements.txt
+      env_file:
+        - .env
+
+      ports:
+        - 8080:8080
+#      depends_on:
+#        - postgres
+      command: 'bash -c "pip3 install -r requirements.txt && airflow db init && airflow webserver -D && airflow scheduler -D"'
+
