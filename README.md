@@ -1,11 +1,11 @@
 # Building an ETL pipeline with Apache Airflow
-The goal of the project is to build a dashboard that showcasessales funnel through standard Data Engineering practices and using technologies such as Apache Airflow.
+The goal of the project is to build a dashboard that showcases sales funnel through standard Data Engineering practices and using technologies such as Apache Airflow.
 
 ## Data Source
 4 CSV files containing structured data. The data files are stored in the 'data' folder
 ## Overall Solution
 
-- The proposed solution is to build the data pipeline using Apache Airflow as required. The overall strategy is to create two databases namely, **transactional_db** and **data_warehouse_db**. The reason for creating two databasesis to avoid using the main database (**transactional_db**) when performingdata analysis related tasks. 
+- The proposed solution is to build a data pipeline using Apache Airflow as required. The overall strategy is to create two databases namely, **transactional_db** and **data_warehouse_db**. The reason for creating two databases is to avoid using the main database (**transactional_db**) when performing data analysis related tasks. 
 - The data stored in the **data_warehouse_db** is to be used to perform transformations and building of dashboard reports.
 - The data warehouse is to be updated incrementally.
 - Reporting tools such as PowerBI can be used to extract and visualise reports.The tool also allows the reports to be automatically refreshed with new data coming in at predefined intervals. 
@@ -17,7 +17,7 @@ The goal of the project is to build a dashboard that showcasessales funnel throu
 
 
 ## TODO:
-Given the personal time constraints, this project was timeboxed. As the allocatedtimeline was exhausted, the following tasks still need to be completed:
+Given the personal time constraints, this project was timeboxed. As the allocated timeline was exhausted, the following tasks still need to be completed:
 
 - Dashboard showcasing sales funnel for each offer and for the data in aggregate. The data required to build this report is pre-computed and stored in the **sales_funnel** table.
 - Incremental update of the data in the **data_warehouse_db**
