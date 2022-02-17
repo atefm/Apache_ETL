@@ -1,5 +1,5 @@
 # Building an ETL pipeline with Apache Airflow
-The goal of the project is to build a dashboard that showcases sales funnel through standard Data Engineering practices and using technologies such as Apache Airflow.
+The goal of the project is to create sales funnel data pipeline through standard Data Engineering practices and using technologies such as Apache Airflow.
 
 ## Data Source
 4 CSV files containing structured data. The data files are stored in the 'data' folder
@@ -15,16 +15,8 @@ The goal of the project is to build a dashboard that showcases sales funnel thro
 - Populating the tables using the data provided.
 - Transforming the data required for sales funnel reporting to avoid expensive **join** operations.
 
-
-## TODO:
-Given the personal time constraints, this project was timeboxed. As the allocated timeline was exhausted, the following tasks still need to be completed:
-
-- Dashboard showcasing sales funnel for each offer and for the data in aggregate. The data required to build this report is pre-computed and stored in the **sales_funnel** table.
-- Incremental update of the data in the **data_warehouse_db**
-- Calculation of Euro value for non-euro currencies based on either the latest exchange rate or the exchange rate at the time of the deal.
-
 ## USAGE
-The solution is dockerized and both the data and environmental variable file are providedin this repo for the sake of simplicity. Makefile is provided to auto configure the containers.
+The solution is dockerized and both the data and environmental variable file are provided in this repo for the sake of simplicity. Makefile is provided to auto configure the containers.
 
 When running it for the first time, please run **make build**.
 
